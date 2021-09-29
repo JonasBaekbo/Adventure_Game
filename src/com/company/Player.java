@@ -57,10 +57,11 @@ public class Player {
                     }
                 }
                 case "look" -> {
+                    System.out.println(currentRoom);
                     if (currentRoom.getListOfItems() == null ){
-                        System.out.println("Der er ingen items");
+                        System.out.println("There is no items in this room");
                     }else{
-                        System.out.println(currentRoom.getListOfItems());
+                        System.out.println("List of items in the room:\n" + currentRoom.getListOfItems());
 
                     }
                 }
