@@ -56,7 +56,15 @@ public class Player {
 
                     }
                 }
-                case "look" -> System.out.println(currentRoom);
+                case "look" -> {
+                    if (currentRoom.getListOfItems() == null ){
+                        System.out.println("Der er ingen items");
+                    }else{
+                        System.out.println(currentRoom.getListOfItems());
+
+                    }
+                }
+
                 case "help" -> System.out.println("List of commands:\n\"go\": Use this and type a direction you want to go in(north, south, east, west) - Example: go north\n\"look\": Writes the description of the current room you are in.\n\"exit\": Exits the game. Use this when you want to end your game. It does'nt save your progress");
                 case "exit" -> System.exit(0);
             }

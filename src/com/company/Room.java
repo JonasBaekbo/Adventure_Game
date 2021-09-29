@@ -1,5 +1,7 @@
 package com.company;
 
+import java.util.ArrayList;
+
 public class Room {
     private String name;
     private String description;
@@ -7,13 +9,23 @@ public class Room {
     private Room south;
     private Room east;
     private Room west;
-    public Room(String name, String description, Room north, Room south, Room east, Room west){
+    private Item item;
+    private ArrayList<String> listOfItems;
+    public Room(String name, String description, Room north, Room south, Room east, Room west, Item[] items) {
         this.name = name;
         this.description = description;
         this.north = north;
-    this.south = south;
-    this.east = east;
-    this.west = west;
+        this.south = south;
+        this.east = east;
+        this.west = west;
+        this.listOfItems = new ArrayList<>();
+        for (Item value : items) {
+            if (value != null) {
+                this.setListOfItems(value.getItemName(), value.getItemDescription());
+            } else {
+                listOfItems = null;
+            }
+        }
     }
 
     public Room getNorth() {
@@ -46,6 +58,20 @@ public class Room {
 
     public void setWest(Room west) {
         this.west = west;
+    }
+
+    public void setListOfItems(String itemName, String itemDescription) {
+        if (itemName != null && itemDescription != null){
+        Item item = new Item(itemName, itemDescription);
+        String[] things = {item.toString()};
+        listOfItems.add(item.toString());
+
+        }
+
+    }
+
+    public ArrayList<String> getListOfItems() {
+        return listOfItems;
     }
 
     @Override

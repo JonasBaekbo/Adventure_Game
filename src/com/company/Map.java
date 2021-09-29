@@ -4,15 +4,15 @@ public class Map {
     public static Room currentRoom;
     private Room startroom;
     public Map(int startRoom){
-        Room room1 = new Room("Room1", "You are on an open area filled with grass. In the distance you see a house", null, null, null, null);
-        Room room2 = new Room("Room2", "You make your way onto an open road", null, null, null, null);
-        Room room3 = new Room("Room3", "You make your way into a large dark forrest", null, null, null, null);
-        Room room4 = new Room("Room4", "You are in front of the house", null, null, null, null);
-        Room room5 = new Room("Room5", "You are the basement of the house", null, null, null, null);
-        Room room6 = new Room("Room6", "You are behind the house", null, null, null, null);
-        Room room7 = new Room("Room7", "You make your way into a small room", null, null, null, null);
-        Room room8 = new Room("Room8", "You are in a house with 3 different rooms", null, null, null, null);
-        Room room9 = new Room("Room9", "You make your way into the houses biggest room", null, null, null, null);
+        Room room1 = new Room("Room1", "You are on an open area filled with grass. In the distance you see a house", null, null, null, null, new Item[]{new Item("Test0", "Test")});
+        Room room2 = new Room("Room2", "You make your way onto an open road", null, null, null, null, new Item[]{null});
+        Room room3 = new Room("Room3", "You make your way into a large dark forrest", null, null, null, null, new Item[]{new Item("Test1", "Test")});
+        Room room4 = new Room("Room4", "You are in front of the house", null, null, null, null, new Item[]{new Item("Test1_1", "Test"), new Item("Test1_2", "Test")});
+        Room room5 = new Room("Room5", "You are the basement of the house", null, null, null, null, new Item[]{new Item("Test1", "Test")});
+        Room room6 = new Room("Room6", "You are behind the house", null, null, null, null, new Item[]{new Item("Test1", "Test")});
+        Room room7 = new Room("Room7", "You make your way into a small room", null, null, null, null, new Item[]{new Item("Test2_1", "Test"), new Item("Test2_2", "Test"), new Item("Test2_3", "Test")});
+        Room room8 = new Room("Room8", "You are in a house with 3 different rooms", null, null, null, null, new Item[]{new Item("Test1", "Test")});
+        Room room9 = new Room("Room9", "You make your way into the houses biggest room", null, null, null, null, new Item[]{new Item("Test1", "Test")});
         room1.setSouth(room4);
         room1.setEast(room2);
         room2.setEast(room3);
