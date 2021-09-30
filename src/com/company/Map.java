@@ -31,10 +31,7 @@ public class Map {
         room8.setWest(room7);
         room9.setNorth(room6);
         room9.setWest(room8);
-        if (startRoom == 1){
-            this.startroom = room1;
-            currentRoom = room1;
-        }
+currentRoom = room1;
 
     };
 
