@@ -1,7 +1,6 @@
 package com.company;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Room {
     private String name;
@@ -71,13 +70,21 @@ public class Room {
 
     }
 
-    public ArrayList<Item> getListOfItems() {
-        return listOfItems;
+    public String getListOfItems() {
+        if (listOfItems == null){
+            return null;
+        }else{
+        StringBuilder sb = new StringBuilder();
+        for (Item s : listOfItems)
+        {
+            sb.append(s);
+            sb.append("\t");
+        }
+        return sb.toString();
+
+        }
     }
 
-    public void takeItem(Item pickedUpItem){
-
-    }
     public void dropItem(String droppedItem){
     listOfItems.remove(findItem(droppedItem));
     }

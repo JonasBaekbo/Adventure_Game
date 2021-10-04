@@ -1,6 +1,8 @@
 package com.company;
 
-public class Item {
+import java.util.ArrayList;
+
+public class Item extends ArrayList<Item> {
     private final String itemName;
     private final String itemDescription;
 

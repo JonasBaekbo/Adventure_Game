@@ -7,7 +7,7 @@ public class Map {
         Room room1 = new Room("Room1", "You are on an open area filled with grass. In the distance you see a house", null, null, null, null, new Item[]{new Item("key", "A key to a small house")});
         Room room2 = new Room("Room2", "You make your way onto an open road", null, null, null, null, new Item[]{new Item("rock", "A little black shiny rock")});
         Room room3 = new Room("Room3", "You make your way into a large dark forrest", null, null, null, null, new Item[]{new Item("branch", "A small branch that has fallen down from a tree")});
-        Room room4 = new Room("Room4", "You are in front of the house", null, null, null, null, new Item[]{null});
+        Room room4 = new Room("Room4", "You are in front of the house", null, null, null, null, new Item[]{});
         Room room5 = new Room("Room5", "You are the basement of the house", null, null, null, null, new Item[]{new Item("wine", "A tasty old wine from the ancient days")});
         Room room6 = new Room("Room6", "You are behind the house", null, null, null, null, new Item[]{null});
         Room room7 = new Room("Room7", "You make your way into a small room", null, null, null, null, new Item[]{new Item("can", "A can of Dehydrated Water")});
