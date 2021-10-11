@@ -10,6 +10,7 @@ public class Player {
     private Room currentRoom;
     private int playerHealth;
     private ArrayList<Item> playerInventory = new ArrayList<>();
+    private ArrayList<Item> equipedWeapon = new ArrayList<>();
 
 
     public Player(Room currentRoom, int health) {
@@ -83,6 +84,8 @@ public class Player {
 
                 case "help" -> System.out.println("List of commands:\n\"go\": Use this and type a direction you want to go in(north, south, east, west) - Example: go north\n\"look\": Writes the description of the current room you are in.\n\"take\": Picks up an item in a room - Example: take itemname\n\"drop\": Drops an item in a room - Example: drop itemname\n\"inventory\": Displays the inventory\n\"exit\": Exits the game. Use this when you want to end your game. It does'nt save your progress");
                 case "exit" -> System.exit(0);
+
+                case "showe" -> System.out.println("you have " + equipedWeapon + " equiped");
             }
             if (playerInventory.isEmpty()) {
                 switch (userDirection) {
@@ -102,12 +105,11 @@ public class Player {
             switch (takeOrDropCommand){
                 case "take" -> takeItem(this.currentRoom.findItem(takenorDroppedItem.substring(1)));
                 case "eat " -> eatFood(takenorDroppedItem);
-                case "drop" -> {
-                        dropItem(getPlayerItem(takenorDroppedItem));
-
-                    }
+                case "drop" -> dropItem(getPlayerItem(takenorDroppedItem));
+                case "equi" -> equipWeapon(getPlayerItem(takenorDroppedItem));
                 }
             }
+
         }
     }
 
@@ -132,6 +134,18 @@ public class Player {
                 }
             }
     }
+    private void equipWeapon(Item equipedItem){
+        if (equipedItem == null){
+            System.out.println("you can not equip that");
+        }else {
+            equipedWeapon.add(equipedItem);
+            playerInventory.remove(equipedItem);
+            System.out.println("you equip " + equipedItem);
+        }
+    }
+    public void showEquipedWeapon(){
+        System.out.println("you have " + equipedWeapon + "equiped");
+    }
 
     private int showPlayerHealth() {
         return this.playerHealth;
@@ -145,7 +159,7 @@ public class Player {
     public void dropItem(Item takenItem){
         this.currentRoom.setListOfItems(takenItem);
         playerInventory.remove(takenItem);
-        System.out.println("You drop: " + takenItem);
+        System.out.println("You drop " + takenItem);
     }
     public Item getPlayerItem(String name) {
         for (Item listOfItem : playerInventory) {

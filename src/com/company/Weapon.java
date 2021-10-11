@@ -23,7 +23,7 @@ public abstract class Weapon extends Item {
 
     @Override
     public String toString() {
-        return getItemName();
+        return getItemDescription();
 
     }
 }

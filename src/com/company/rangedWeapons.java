@@ -6,10 +6,11 @@ public class rangedWeapons extends Weapon{
 
     public rangedWeapons(String itemName, String itemDescription, int damage, int ammo){
         super(itemName,itemDescription,damage);
+        ammo = this.ammo;
 
     }
     public int getAmmo() {
-        return ammo;
+        return this.ammo;
     }
 
     public void setAmmo(int ammo) {
@@ -19,7 +20,7 @@ public class rangedWeapons extends Weapon{
 
     @Override
     public String toString() {
-        return getItemName();
+        return getItemDescription() + " damage "+ getDamage() + " ammo count " + getAmmo();
 
     }
 }

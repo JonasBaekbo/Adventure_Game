@@ -6,7 +6,11 @@ public class MeleeWeapon extends Weapon {
         super(itemName, itemDescription, damage);
     }
 
+    @Override
+    public String toString() {
+        return getItemDescription() + " weapon damage "+ getDamage();
 
+    }
 
 
 }

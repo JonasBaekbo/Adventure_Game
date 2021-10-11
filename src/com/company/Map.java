@@ -43,6 +43,8 @@ public class Map {
         room9.setListOfItems(new Item("Pen", "A used pen"));
         room9.setListOfItems(new Item("Doll", "A creepy looking doll, with giant eyes"));
         room9.setListOfItems(new Item("Knife", "A rusty knife"));
+        room1.setListOfItems(new MeleeWeapon("axe", "a rust axe",3));
+        room1.setListOfItems(new rangedWeapons("musket", "a old musket" ,3 ,8));
 
 currentRoom = room1;
 
