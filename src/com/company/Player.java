@@ -85,7 +85,7 @@ public class Player {
                 case "help" -> System.out.println("List of commands:\n\"go\": Use this and type a direction you want to go in(north, south, east, west) - Example: go north\n\"look\": Writes the description of the current room you are in.\n\"take\": Picks up an item in a room - Example: take itemname\n\"drop\": Drops an item in a room - Example: drop itemname\n\"inventory\": Displays the inventory\n\"exit\": Exits the game. Use this when you want to end your game. It does'nt save your progress");
                 case "exit" -> System.exit(0);
 
-                case "showe" -> System.out.println("you have " + equipedWeapon + " equiped");
+                case "showe" -> System.out.println("you have " + showEquipedWeapon() + " equiped");
             }
             if (playerInventory.isEmpty()) {
                 switch (userDirection) {
@@ -137,14 +137,26 @@ public class Player {
     private void equipWeapon(Item equipedItem){
         if (equipedItem == null){
             System.out.println("you can not equip that");
-        }else {
+        }else if (equipedWeapon.size() == 1){
+            playerInventory.remove(equipedItem);
+            playerInventory.addAll(equipedWeapon);
+            equipedWeapon.clear();
+            equipedWeapon.add(equipedItem);
+            System.out.println("you equip " + equipedItem);
+        }
+        else {
             equipedWeapon.add(equipedItem);
             playerInventory.remove(equipedItem);
             System.out.println("you equip " + equipedItem);
         }
     }
-    public void showEquipedWeapon(){
-        System.out.println("you have " + equipedWeapon + "equiped");
+    public String showEquipedWeapon(){
+        StringBuilder sb = new StringBuilder();
+        for (Item s : equipedWeapon)
+        {
+            sb.append(s);
+        }
+        return sb.toString();
     }
 
     private int showPlayerHealth() {
