@@ -22,13 +22,10 @@ public class Food extends Item {
     public int getHealthPoints() {
         return this.healthPoints;
     }
-<<<<<<< HEAD
-=======
  @Override
     public String toString() {
         return super.toString() + "Food{" +
                 "healthPoints=" + healthPoints +
                 '}';
     }
->>>>>>> origin/main
 }
