@@ -11,7 +11,7 @@ public class Room {
     private Room west;
     private Item item;
     private ArrayList<Item> listOfItems;
-    public Room(String name, String description, Room north, Room south, Room east, Room west, Item[] items) {
+    public Room(String name, String description, Room north, Room south, Room east, Room west) {
         this.name = name;
         this.description = description;
         this.north = north;
@@ -19,13 +19,6 @@ public class Room {
         this.east = east;
         this.west = west;
         this.listOfItems = new ArrayList<>();
-        for (Item value : items) {
-            if (value != null) {
-                this.setListOfItems(value.getItemName(), value.getItemDescription());
-            } else {
-                listOfItems = null;
-            }
-        }
     }
 
     public Room getNorth() {
@@ -60,15 +53,10 @@ public class Room {
         this.west = west;
     }
 
-    public void setListOfItems(String itemName, String itemDescription) {
-        if (itemName != null && itemDescription != null){
-        Item item = new Item(itemName, itemDescription);
-        String[] things = {item.toString()};
-        listOfItems.add(item);
+    public void setListOfItems(Item item) {
+        this.listOfItems.add(item);
 
         }
-
-    }
 
     public String getListOfItems() {
         if (listOfItems == null){
@@ -85,16 +73,16 @@ public class Room {
         }
     }
 
-    public void dropItem(String droppedItem){
-    listOfItems.remove(findItem(droppedItem));
+    public void dropItemFromRoom(Item droppedItem){
+    listOfItems.remove(droppedItem);
     }
     public Item findItem(String pickedUpItem) {
-        for (int i = 0; i < listOfItems.size(); i++) {
-            if (pickedUpItem.equals(listOfItems.get(i).getItemName())){
-                return listOfItems.get(i);
+        for (Item listOfItem : listOfItems) {
+            if (pickedUpItem.equals(listOfItem.getItemName())) {
+                return listOfItem;
             }
         }
-        return null;
+        return item;
     }
 
     @Override
