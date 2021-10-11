@@ -4,7 +4,8 @@ public class Map {
     public static Room currentRoom;
     private Room startroom;
     public Map(int startRoom){
-        Room room1 = new Room("Room1", "You are on an open area filled with grass. In the distance you see a house", null, null, null, null, new Item[]{new Item("key", "A key to a small house")});
+
+        Room room1 = new Room("Room1", "You are on an open area filled with grass. In the distance you see a house", null, null, null, null, new Item[]{new Item("key", "A key to a small house"), new Food("apple", "A shiny apple", 2)});
         Room room2 = new Room("Room2", "You make your way onto an open road", null, null, null, null, new Item[]{new Item("rock", "A little black shiny rock")});
         Room room3 = new Room("Room3", "You make your way into a large dark forrest", null, null, null, null, new Item[]{new Item("branch", "A small branch that has fallen down from a tree")});
         Room room4 = new Room("Room4", "You are in front of the house", null, null, null, null, new Item[]{});
