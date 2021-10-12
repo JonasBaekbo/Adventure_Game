@@ -111,7 +111,7 @@ public class Player {
                 }
                 case "eat " -> eatFood(takenorDroppedItem);
                 case "drop" -> dropItem(getPlayerItem(takenorDroppedItem));
-                case "equi" -> equipWeapon(getPlayerItem(takenorDroppedItem));
+                case "equi" -> equipWeapon(getPlayerItem(takenorDroppedItem.substring(1)));
                 }
             }
 
@@ -178,9 +178,14 @@ public class Player {
     }
 
     public void takeItem(Item takenItem){
+        if (takenItem == null){
+            System.out.println("There is no such item");
+        }else{
         playerInventory.add(takenItem);
         this.currentRoom.dropItemFromRoom(takenItem.getItemName());
         System.out.println("You take " + takenItem);
+
+        }
     }
     public void dropItem(Item takenItem){
         this.currentRoom.setListOfItems(takenItem);
@@ -188,7 +193,7 @@ public class Player {
         System.out.println("You drop " + takenItem);
     }
     public Item getPlayerItem(String name) {
-        for (Item listOfItem : playerInventory) {
+        for (Item listOfItem : this.playerInventory) {
             if (name.equals(" " + listOfItem.getItemName())) {
                 return listOfItem;
             }
