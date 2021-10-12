@@ -103,7 +103,9 @@ public class Player {
             String takeOrDropCommand = userDirection.substring(0,4);
             String takenorDroppedItem = userDirection.substring(4);
             switch (takeOrDropCommand){
-                case "take" -> takeItem(this.currentRoom.findItem(takenorDroppedItem.substring(1)));
+                case "take" -> {
+                    takeItem(this.currentRoom.findItem(takenorDroppedItem.substring(1)));
+                }
                 case "eat " -> eatFood(takenorDroppedItem);
                 case "drop" -> dropItem(getPlayerItem(takenorDroppedItem));
                 case "equi" -> equipWeapon(getPlayerItem(takenorDroppedItem));
@@ -123,14 +125,18 @@ public class Player {
                     this.currentRoom.dropItemFromRoom(foundinRoom);
                     System.out.println("You have eaten " + foundinRoom + "\n(Added " + healthPoints + " healthpoints)");
 
+                }else{
+                    System.out.println("You can't eat that!");
                 }
             }else if (playerInventory.contains(foundInInv)){
                 if (foundInInv instanceof Food){
                     int healthPoints = (((Food) foundInInv).getHealthPoints());
                     playerHealth += healthPoints;
-                    //this.currentRoom.dropItemFromRoom(foundInInv);
+                    playerInventory.remove(foundInInv);
                     System.out.println("You have eaten " + foundInInv + "\n(Added " + healthPoints + " healthpoints)");
 
+                }else{
+                    System.out.println("You can't eat that!");
                 }
             }
     }
@@ -150,6 +156,11 @@ public class Player {
             System.out.println("you equip " + equipedItem);
         }
     }
+    private void attack(Weapon weaponUsed){
+
+    }
+
+
     public String showEquipedWeapon(){
         StringBuilder sb = new StringBuilder();
         for (Item s : equipedWeapon)

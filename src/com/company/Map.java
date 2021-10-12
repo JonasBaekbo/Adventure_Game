@@ -35,6 +35,8 @@ public class Map {
 
         room1.setListOfItems(new Item("key", "A key to a small house"));
         room1.setListOfItems(new Food("apple", "A shiny apple", 2));
+        room1.setListOfItems(new MeleeWeapon("axe", "a rust axe",3));
+        room1.setListOfItems(new rangedWeapons("musket", "a old musket" ,3 ,8));
         room2.setListOfItems(new Item("rock", "A little black shiny rock"));
         room3.setListOfItems(new Item("branch", "A small branch that has fallen down from a tree"));
         room5.setListOfItems(new Item("wine", "A tasty old wine from the ancient days"));
@@ -43,8 +45,6 @@ public class Map {
         room9.setListOfItems(new Item("Pen", "A used pen"));
         room9.setListOfItems(new Item("Doll", "A creepy looking doll, with giant eyes"));
         room9.setListOfItems(new Item("Knife", "A rusty knife"));
-        room1.setListOfItems(new MeleeWeapon("axe", "a rust axe",3));
-        room1.setListOfItems(new rangedWeapons("musket", "a old musket" ,3 ,8));
 
 currentRoom = room1;
 

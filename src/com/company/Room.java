@@ -74,15 +74,16 @@ public class Room {
     }
 
     public void dropItemFromRoom(Item droppedItem){
-    listOfItems.remove(droppedItem);
+        this.listOfItems.remove(droppedItem);
+        System.out.println(droppedItem);
     }
     public Item findItem(String pickedUpItem) {
-        for (Item listOfItem : listOfItems) {
+        for (Item listOfItem : this.listOfItems) {
             if (pickedUpItem.equals(listOfItem.getItemName())) {
                 return listOfItem;
             }
         }
-        return item;
+        return null;
     }
 
     @Override
