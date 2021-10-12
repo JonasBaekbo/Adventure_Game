@@ -136,7 +136,7 @@ public class Player {
     }
     private void equipWeapon(Item equipedItem){
         if (equipedItem == null){
-            System.out.println("you can not equip that");
+            System.out.println("you dont have that in your inventory");
         }else if (equipedItem instanceof Weapon) {
             if (equipedWeapon.size() == 1) {
                 playerInventory.remove(equipedItem);
@@ -150,7 +150,7 @@ public class Player {
                 System.out.println("you equip " + equipedItem);
             }
         }else{
-            System.out.println(equipedItem + " is not a weapon");
+            System.out.println(equipedItem.getItemName() + " is not a weapon");
         }
     }
     public String showEquipedWeapon(){
