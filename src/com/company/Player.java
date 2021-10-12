@@ -83,12 +83,9 @@ public class Player {
                 }
 
                 case "help" -> System.out.println("List of commands:\n\"go\": Use this and type a direction you want to go in(north, south, east, west) - Example: go north\n\"look\": Writes the description of the current room you are in.\n\"take\": Picks up an item in a room - Example: take itemname\n\"drop\": Drops an item in a room - Example: drop itemname\n\"inventory\": Displays the inventory\n\"exit\": Exits the game. Use this when you want to end your game. It does'nt save your progress");
+                case "exit" -> System.exit(0);
 
                 case "showe" -> System.out.println("you have " + showEquipedWeapon() + " equiped");
-
-                case "attack" -> attack(null);
-
-                case "exit" -> System.exit(0);
             }
             if (playerInventory.isEmpty()) {
                 switch (userDirection) {
@@ -106,12 +103,10 @@ public class Player {
             String takeOrDropCommand = userDirection.substring(0,4);
             String takenorDroppedItem = userDirection.substring(4);
             switch (takeOrDropCommand){
-                case "take" -> {
-                    takeItem(this.currentRoom.findItem(takenorDroppedItem.substring(1)));
-                }
+                case "take" -> takeItem(this.currentRoom.findItem(takenorDroppedItem.substring(1)));
                 case "eat " -> eatFood(takenorDroppedItem);
                 case "drop" -> dropItem(getPlayerItem(takenorDroppedItem));
-                case "equi" -> equipWeapon(getPlayerItem(takenorDroppedItem));
+                case "equi" -> equipWeapon(getPlayerItem(takenorDroppedItem.substring(1)));
                 }
             }
 
@@ -128,42 +123,36 @@ public class Player {
                     this.currentRoom.dropItemFromRoom(foundinRoom.getItemName());
                     System.out.println("You have eaten " + foundinRoom + "\n(Added " + healthPoints + " healthpoints)");
 
-                }else{
-                    System.out.println("You can't eat that!");
                 }
             }else if (playerInventory.contains(foundInInv)){
                 if (foundInInv instanceof Food){
                     int healthPoints = (((Food) foundInInv).getHealthPoints());
                     playerHealth += healthPoints;
-                    playerInventory.remove(foundInInv);
+                    //this.currentRoom.dropItemFromRoom(foundInInv);
                     System.out.println("You have eaten " + foundInInv + "\n(Added " + healthPoints + " healthpoints)");
 
-                }else{
-                    System.out.println("You can't eat that!");
                 }
             }
     }
     private void equipWeapon(Item equipedItem){
         if (equipedItem == null){
             System.out.println("you can not equip that");
-        }else if (equipedWeapon.size() == 1){
-            playerInventory.remove(equipedItem);
-            playerInventory.addAll(equipedWeapon);
-            equipedWeapon.clear();
-            equipedWeapon.add(equipedItem);
-            System.out.println("you equip " + equipedItem);
-        }
-        else {
-            equipedWeapon.add(equipedItem);
-            playerInventory.remove(equipedItem);
-            System.out.println("you equip " + equipedItem);
+        }else if (equipedItem instanceof Weapon) {
+            if (equipedWeapon.size() == 1) {
+                playerInventory.remove(equipedItem);
+                playerInventory.addAll(equipedWeapon);
+                equipedWeapon.clear();
+                equipedWeapon.add(equipedItem);
+                System.out.println("you equip " + equipedItem);
+            }else{
+                equipedWeapon.add(equipedItem);
+                playerInventory.remove(equipedItem);
+                System.out.println("you equip " + equipedItem);
+            }
+        }else{
+            System.out.println(equipedItem + " is not a weapon");
         }
     }
-    private void attack(Weapon weaponUsed){
-
-    }
-
-
     public String showEquipedWeapon(){
         StringBuilder sb = new StringBuilder();
         for (Item s : equipedWeapon)
