@@ -83,9 +83,12 @@ public class Player {
                 }
 
                 case "help" -> System.out.println("List of commands:\n\"go\": Use this and type a direction you want to go in(north, south, east, west) - Example: go north\n\"look\": Writes the description of the current room you are in.\n\"take\": Picks up an item in a room - Example: take itemname\n\"drop\": Drops an item in a room - Example: drop itemname\n\"inventory\": Displays the inventory\n\"exit\": Exits the game. Use this when you want to end your game. It does'nt save your progress");
-                case "exit" -> System.exit(0);
 
                 case "showe" -> System.out.println("you have " + showEquipedWeapon() + " equiped");
+
+                case "attack" -> attack(null);
+
+                case "exit" -> System.exit(0);
             }
             if (playerInventory.isEmpty()) {
                 switch (userDirection) {
@@ -122,7 +125,7 @@ public class Player {
                 if (foundinRoom instanceof Food){
                     int healthPoints = (((Food) foundinRoom).getHealthPoints());
                     playerHealth += healthPoints;
-                    this.currentRoom.dropItemFromRoom(foundinRoom);
+                    this.currentRoom.dropItemFromRoom(foundinRoom.getItemName());
                     System.out.println("You have eaten " + foundinRoom + "\n(Added " + healthPoints + " healthpoints)");
 
                 }else{
@@ -176,7 +179,7 @@ public class Player {
 
     public void takeItem(Item takenItem){
         playerInventory.add(takenItem);
-        this.currentRoom.dropItemFromRoom(takenItem);
+        this.currentRoom.dropItemFromRoom(takenItem.getItemName());
         System.out.println("You take " + takenItem);
     }
     public void dropItem(Item takenItem){

@@ -73,9 +73,12 @@ public class Room {
         }
     }
 
-    public void dropItemFromRoom(Item droppedItem){
-        this.listOfItems.remove(droppedItem);
-        System.out.println(droppedItem);
+    public void dropItemFromRoom(String droppedItem){
+        for (int i = 0; i < this.listOfItems.size(); i++) {
+            if (this.listOfItems.get(i).getItemName().equals(droppedItem)) {
+                this.listOfItems.remove(i);
+            }
+        }
     }
     public Item findItem(String pickedUpItem) {
         for (Item listOfItem : this.listOfItems) {
