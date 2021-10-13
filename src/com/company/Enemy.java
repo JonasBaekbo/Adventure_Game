@@ -41,4 +41,8 @@ public class Enemy {
     public void dropWeapon(){
 
     }
+
+    public void decreaseHealthPoints(int damage) {
+        this.healthPoints -= damage;
+    }
 }

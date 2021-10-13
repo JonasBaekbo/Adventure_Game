@@ -11,6 +11,7 @@ public class Room {
     private Room west;
     private Item item;
     private ArrayList<Item> listOfItems;
+    private Enemy enemy;
     public Room(String name, String description, Room north, Room south, Room east, Room west) {
         this.name = name;
         this.description = description;
@@ -92,5 +93,22 @@ public class Room {
     @Override
     public String toString() {
         return "You are in the room " + name + ". " + description;
+    }
+
+    public void damageEnemy(int damage) {
+        this.enemy.decreaseHealthPoints(damage);
+    }
+    public void addEnemyToRoom(Enemy enemy){
+        this.enemy = enemy;
+    }
+
+    public Enemy getEnemy() {
+        return enemy;
+    }
+
+
+    public void removeEnemyFromRoom() {
+        setListOfItems(this.enemy.getWeapon());
+        this.enemy = null;
     }
 }

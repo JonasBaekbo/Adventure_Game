@@ -10,7 +10,7 @@ public class Player {
     private Room currentRoom;
     private int playerHealth;
     private ArrayList<Item> playerInventory = new ArrayList<>();
-    private ArrayList<Item> equipedWeapon = new ArrayList<>();
+    private Weapon equippedWeapon;
 
 
     public Player(Room currentRoom, int health) {
@@ -28,6 +28,9 @@ public class Player {
                        this. currentRoom = this.currentRoom.getNorth();
                         System.out.println("Going north");
                         System.out.println(this.currentRoom);
+                        if (this.currentRoom.getEnemy() != null){
+                            System.out.println("There might be something in here with you!");
+                        }
 
                     }
                 }
@@ -38,6 +41,9 @@ public class Player {
                        this. currentRoom = this.currentRoom.getSouth();
                         System.out.println("Going south");
                         System.out.println(this.currentRoom);
+                        if (this.currentRoom.getEnemy() != null){
+                            System.out.println("There might be something in here with you!");
+                        }
 
                     }
                 }
@@ -48,6 +54,9 @@ public class Player {
                         this.currentRoom = this.currentRoom.getEast();
                         System.out.println("Going east");
                         System.out.println(this.currentRoom);
+                        if (this.currentRoom.getEnemy() != null){
+                            System.out.println("There might be something in here with you!");
+                        }
 
                     }
                 }
@@ -58,6 +67,9 @@ public class Player {
                         this.currentRoom = this.currentRoom.getWest();
                         System.out.println("Going west");
                         System.out.println(this.currentRoom);
+                        if (this.currentRoom.getEnemy() != null){
+                            System.out.println("There might be something in here with you!");
+                        }
 
                     }
                 }
@@ -81,11 +93,24 @@ public class Player {
                         System.out.printf("Health: %s\nYou are hurt! You need to eat to feel better!", showPlayerHealth());
                     }
                 }
+                case "attack" -> {
+                    if (this.currentRoom.getEnemy() == null){
+                        System.out.println("There is no enemy to attack!");
+                    } else{
+                    attack();
+                }}
 
                 case "help" -> System.out.println("List of commands:\n\"go\": Use this and type a direction you want to go in(north, south, east, west) - Example: go north\n\"look\": Writes the description of the current room you are in.\n\"take\": Picks up an item in a room - Example: take itemname\n\"drop\": Drops an item in a room - Example: drop itemname\n\"inventory\": Displays the inventory\n\"exit\": Exits the game. Use this when you want to end your game. It does'nt save your progress");
                 case "exit" -> System.exit(0);
 
-                case "showe" -> System.out.println("you have " + showEquipedWeapon() + " equiped");
+                case "show" -> {
+                    if (equippedWeapon == null) {
+                        System.out.println("You have no weapons equipped!");
+                    } else {
+                        System.out.println("You have " + showEquippedWeapon() + " equiped");
+
+                    }
+                }
             }
             if (playerInventory.isEmpty()) {
                 switch (userDirection) {
@@ -138,14 +163,11 @@ public class Player {
         if (equipedItem == null){
             System.out.println("you dont have that in your inventory");
         }else if (equipedItem instanceof Weapon) {
-            if (equipedWeapon.size() == 1) {
-                playerInventory.remove(equipedItem);
-                playerInventory.addAll(equipedWeapon);
-                equipedWeapon.clear();
-                equipedWeapon.add(equipedItem);
+            if (equippedWeapon != null) {
+                equippedWeapon = (Weapon) equipedItem;
                 System.out.println("you equip " + equipedItem);
             }else{
-                equipedWeapon.add(equipedItem);
+                equippedWeapon = (Weapon) equipedItem;
                 playerInventory.remove(equipedItem);
                 System.out.println("you equip " + equipedItem);
             }
@@ -153,14 +175,55 @@ public class Player {
             System.out.println(equipedItem.getItemName() + " is not a weapon");
         }
     }
-    public String showEquipedWeapon(){
-        StringBuilder sb = new StringBuilder();
-        for (Item s : equipedWeapon)
-        {
-            sb.append(s);
-        }
-        return sb.toString();
+    public String showEquippedWeapon(){
+        return this.equippedWeapon.getItemName();
     }
+
+    public void attack(){
+        if (equippedWeapon instanceof MeleeWeapon){
+        int damage = getDamage();
+        this.currentRoom.damageEnemy(damage);
+            System.out.println("You deal " + damage + " damage with your " + equippedWeapon.getItemName());
+            System.out.println("The " + this.currentRoom.getEnemy().getName() + " has " + this.currentRoom.getEnemy().getHealthPoints() + " HP left");
+            this.decreaseHealthPoints(this.currentRoom.getEnemy().getWeapon().getDamage());
+            System.out.println("You take "  + this.currentRoom.getEnemy().getWeapon().getDamage() + " from the " + this.currentRoom.getEnemy().getName() + "'s " + this.currentRoom.getEnemy().getWeapon().getItemName());
+            System.out.println("You have " + this.playerHealth + " HP left");
+        }else if (equippedWeapon instanceof RangedWeapon){
+            int damage = getDamage();
+            if (((RangedWeapon) equippedWeapon).getAmmo() <= 0){
+                System.out.println("You don't have any ammo in this weapon");
+                this.decreaseHealthPoints(this.currentRoom.getEnemy().getWeapon().getDamage());
+            }else if (((RangedWeapon) equippedWeapon).getAmmo() >= 0){
+            ((RangedWeapon) equippedWeapon).setAmmo(-1);
+            this.currentRoom.damageEnemy(damage);
+                System.out.println("You deal " + damage + " damage with your " + equippedWeapon.getItemName());
+                System.out.println("You have " + ((RangedWeapon) equippedWeapon).getAmmo() + "left in your weapon");
+                System.out.println("The " + this.currentRoom.getEnemy().getName() + " has " + this.currentRoom.getEnemy().getHealthPoints() + " HP left");
+                this.decreaseHealthPoints(this.currentRoom.getEnemy().getWeapon().getDamage());
+                System.out.println("You take "  + this.currentRoom.getEnemy().getWeapon().getDamage() + " from the " + this.currentRoom.getEnemy().getName() + "'s " + this.currentRoom.getEnemy().getWeapon().getItemName());
+                System.out.println("You have " + this.playerHealth + " HP left");
+
+            }
+        }
+        if (this.playerHealth <= 0){
+            System.out.println("You are dead!");
+            System.exit(0);
+        }
+        if (this.currentRoom.getEnemy().getHealthPoints() <= 0){
+            System.out.println("You have killed the " + this.currentRoom.getEnemy().getName());
+            this.currentRoom.removeEnemyFromRoom();
+        }
+    }
+
+    private void decreaseHealthPoints(int damage) {
+        this.playerHealth -= damage;
+    }
+
+    private int getDamage() {
+        int damage = equippedWeapon.getDamage();
+        return damage;
+    }
+
 
     private int showPlayerHealth() {
         return this.playerHealth;
