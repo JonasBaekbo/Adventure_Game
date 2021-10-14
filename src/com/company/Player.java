@@ -100,8 +100,19 @@ public class Player {
                     attack();
                 }}
 
-                case "help" -> System.out.println("List of commands:\n\"go\": Use this and type a direction you want to go in(north, south, east, west) - Example: go north\n\"look\": Writes the description of the current room you are in.\n\"take\": Picks up an item in a room - Example: take itemname\n\"drop\": Drops an item in a room - Example: drop itemname\n\"inventory\": Displays the inventory\n\"exit\": Exits the game. Use this when you want to end your game. It does'nt save your progress");
-                case "exit" -> System.exit(0);
+                case "help" -> System.out.println("List of commands:\n\"go\": Use this and type a direction you want to go in(north, south, east, west) - Example: go north\n" +
+                        "\"look\": Writes the description of the current room you are in.\n\"" +
+                        "take\": Picks up an item in a room - Example: take itemname\n\"" +
+                        "drop\": Drops an item in a room - Example: drop itemname\n" +
+                        "\"inventory\": Displays the inventory\n" +
+                        "\"eat\": Eats food in either the current room or in the inventory - Usage: eat itemname\n" +
+                        "\"equip\": Equips a weapon that has been picked up - Example: equip itemname\n" +
+                        "\"show\": Displays the current equipped weapon\n" +
+                        "\"attack\": Attacks an enemy if there is one in the current room\n" +
+                        "\"exit\": Exits the game. Use this when you want to end your game. It does'nt save your progress");
+                case "exit" -> {
+                    System.out.println("Thank you for playing \"The House\"!\nHope you had fun!\nThe game will now end itself");
+                    System.exit(0);}
 
                 case "show" -> {
                     if (equippedWeapon == null) {

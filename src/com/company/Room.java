@@ -90,10 +90,6 @@ public class Room {
         return null;
     }
 
-    @Override
-    public String toString() {
-        return "You are in the room " + name + ". " + description;
-    }
 
     public void damageEnemy(int damage) {
         this.enemy.decreaseHealthPoints(damage);
@@ -110,5 +106,9 @@ public class Room {
     public void removeEnemyFromRoom() {
         setListOfItems(this.enemy.getWeapon());
         this.enemy = null;
+    }
+    @Override
+    public String toString() {
+        return "You are in the room " + name + ". " + description;
     }
 }

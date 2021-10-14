@@ -48,10 +48,12 @@ public class Map {
         room9.setListOfItems(new Item("Doll", "A creepy looking doll, with giant eyes"));
         room9.setListOfItems(new Item("Knife", "A rusty knife"));
         room7.addEnemyToRoom(new Enemy("Ogre", "A big green ogre", 5, (new MeleeWeapon("Mace", "A wooden mace", 2))));
-        room5.addEnemyToRoom(new Enemy("Gobli", "A tiny Gobli", 2 , (new MeleeWeapon("knife", "A tiny rysty knif", 1))));
+        room5.addEnemyToRoom(new Enemy("Goblin", "A tiny Goblin", 2 , (new MeleeWeapon("knife", "A tiny rusty knife", 1))));
         room2.addEnemyToRoom(new Enemy("Troll", "A Giant forstes troll", 8 , (new MeleeWeapon("club" , "A giant wooden club", 4))));
+        if (startRoom == 1){
+        currentRoom = room1;
 
-currentRoom = room1;
+        }
 
     };
 
